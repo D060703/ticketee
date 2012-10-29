@@ -39,6 +39,7 @@ gem 'jquery-rails'
 
 group :test do 
 gem 'factory_girl_rails', '1.4.0'
+gem 'rspec-rails', '2.6.1'
 gem 'cucumber-rails'
 gem 'database_cleaner'
 gem "capybara"
