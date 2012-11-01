@@ -8,6 +8,8 @@ class TicketsController < ApplicationController
 #  The build method simply instantiates a new record for the tickets association on the @project object, working in much the same way as the following code would
 #Ticket.new(:project_id => @project.id  
 
+  def edit
+  end
 
 def create
   @ticket = @project.tickets.build(params[:ticket])
@@ -22,6 +24,23 @@ end
 
 def show
 end
+
+def destroy
+  @ticket.destroy
+  flash[:notice] = "Ticket has been deleted."
+  redirect_to @project
+end
+
+def update
+  if @ticket.update_attributes(params[:ticket])
+    flash[:notice] = "Ticket has been updated."
+    redirect_to [@project, @ticket]
+  else
+      flash[:alert] = "Tickets has not been updated"
+      render :action => "edit"
+  end
+end
+#Remember that in this action you don’t have to find the @ticket or @project objects because a before_filter does it for the show, edit, update, and destroy actions.
 
 
 private
