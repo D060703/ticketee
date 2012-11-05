@@ -41,9 +41,11 @@ gem 'jquery-rails'
 group :test do 
 gem 'factory_girl'
 gem 'rspec-rails', '2.6.1'
-gem 'cucumber-rails'
+gem 'cucumber-rails-training-wheels'
 gem 'database_cleaner'
 gem "capybara"
+gem 'devise', '~> 1.4.3'
+gem 'email_spec'
 end
 
 group :development do 
