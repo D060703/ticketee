@@ -14,8 +14,9 @@ Feature: Signing in
 
 Scenario: Signing in via form
 Given there are the following users:
-	| email | password | unconfirmed |
-	| user@ticketee.com | password | true |
+	| email | password |
+	| user@ticketee.com | password |
+And I am signed in as them
 And I am on the homepage
 When I follow "Sign in"
 And I fill in "Email" with "user@ticketee.com"

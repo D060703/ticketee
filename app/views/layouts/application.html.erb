@@ -3,25 +3,45 @@
 <head>
   <title><%= @title || "Ticketee" %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+
+	<style>
+	<% for state in @states %>
+	.state_<%= state.name.parameterize %> {
+	background: <%= state.background %>;
+	color: <%= state.color %>;
+	}
+	<% end %>
+	</style>
+	
   <%= javascript_include_tag "application" %>
-
-
   <%= csrf_meta_tags %>
 </head>
 <body>
 	
 	<nav>
+		<ul class='navbar'>
+	    <%= link_to "Home", root_path %>
+		<p>
+	    <% admins_only do %>
+	      <li><%= link_to "Admin", admin_root_path %></li>
+	    <% end %>
+		</p>
+	
+		<p>
 		<% if user_signed_in? %>
 		Signed in as <%= current_user.email %>
+		</p>
+		<p>
+		<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 		<% else %>
 		<%= link_to "Sign up", new_user_registration_path %>
 		<% end %>
+		</p>
 	</nav>
-	
 	<%= link_to "Sign in", new_user_session_path %>
-	
+	<p>
 <h1><%= link_to "Ticketee", root_path %></h1>
-
+</p>
 <%= yield %> <!--#This line indicates to the layout where the current action’s template is to be rendered.-->
 
 <% flash.each do |key, value| %>
@@ -33,3 +53,5 @@
 
 </body>
 </html>
+
+

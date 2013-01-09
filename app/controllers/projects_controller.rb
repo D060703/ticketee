@@ -1,8 +1,10 @@
 class ProjectsController < ApplicationController
+  before_filter :authorize_admin!, :except => [:index, :show]
+  before_filter :authenticate_user!, :only => [:index, :show]
   before_filter :find_project, :only => [:show, :edit, :update, :destroy]
   
   def index
-   @projects = Project.all # By calling all on the Project model, you retrieve all the records from the database as Project objects,
+   @projects = Project.for(current_user).all # By calling all on the Project model, you retrieve all the records from the database as Project objects,
   end
   
   def new
@@ -21,7 +23,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    @project = Project.find(params[:id])
+    @tickets = @project.tickets.page(params[:page])
   end
   
   def edit
@@ -47,12 +49,22 @@ class ProjectsController < ApplicationController
   end
   
 private
-  def find_project
-  @project = Project.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-  flash[:alert] = "The project you were looking" +
-    " for could not be found."
-    redirect_to projects_path
+
+def find_project
+   @project = Project.for(current_user).find(params[:id])
+ rescue ActiveRecord::RecordNotFound
+   flash[:alert] = "The project you were looking" +
+     " for could not be found."
+   redirect_to projects_path
+end
+
+def authorize_admin!
+  authenticate_user!
+  unless current_user.admin?
+    flash[:alert] = "You must be an admin to do that."
+    redirect_to root_path
   end
+end
+
   
 end

@@ -5,8 +5,13 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'devise', '2.1.0.rc'
+gem 'cancan', '1.6.7'
+gem 'paperclip', '2.7.0'
+gem 'searcher', :git => "git://github.com/radar/searcher"
+gem 'kaminari'
 
+gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -39,16 +44,16 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 group :test do 
+gem 'gmail'
 gem 'factory_girl'
-gem 'rspec-rails', '2.6.1'
 gem 'cucumber-rails-training-wheels'
 gem 'database_cleaner'
 gem "capybara"
-gem 'devise', '~> 1.4.3'
 gem 'email_spec'
 end
 
 group :development do 
+gem 'gmail'
 gem 'rspec-rails', '2.6.1'
 gem "capybara"
 gem 'annotate', '2.4.0'
