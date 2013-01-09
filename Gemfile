@@ -11,6 +11,7 @@ gem 'paperclip', '2.7.0'
 gem 'searcher', :git => "git://github.com/radar/searcher"
 gem 'kaminari'
 
+gem 'sqlite3'
 gem 'pg'
 
 # Gems used only for assets and not required
