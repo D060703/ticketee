@@ -11,8 +11,13 @@ gem 'paperclip', '2.7.0'
 gem 'searcher', :git => "git://github.com/radar/searcher"
 gem 'kaminari'
 
-gem 'sqlite3'
-gem 'pg'
+group :production, :staging do
+  gem "pg"
+end
+
+group :development, :test do
+  gem "sqlite3-ruby", "~> 1.3.0", :require => "sqlite3"
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
