@@ -1,6 +1,6 @@
 class Api::V1::TicketsController < Api::V1::BaseController
   
-  before_fitler :find_project
+  before_filter :find_project
   
   private
   
